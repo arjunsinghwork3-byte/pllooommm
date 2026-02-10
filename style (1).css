@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body{margin:0;font-family:'Press Start 2P';background:black;color:white;text-align:center}
+.screen{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.hidden{display:none}
+.neon{background:radial-gradient(circle,#ff00cc,#020617)}
+.game-screen{min-height:100vh;background:url('background.webp') center/cover no-repeat}
+canvas{background:rgba(0,0,0,.7);border:3px solid #00ffff}
+.hud{color:#00ffff;padding:10px}
+button{padding:14px 24px;background:black;color:#00ffff;border:2px solid #00ffff}
+.mobile-controls{display:flex;justify-content:space-around}

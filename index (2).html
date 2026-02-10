@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLOOMM Arcade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="landing" class="screen neon">
+<h1>PLOOMM ARCADE</h1>
+<button id="startBtn">START</button>
+</section>
+
+<section id="howTo" class="screen neon hidden">
+<p>Catch ORANGE PLOOMM balls (+10)</p>
+<p>Avoid BLUE CHAOS balls</p>
+<button id="playBtn">PLAY</button>
+</section>
+
+<section id="game" class="game-screen hidden">
+<div class="hud">SCORE: <span id="score">0</span></div>
+<canvas id="canvas" width="400" height="600"></canvas>
+<div class="mobile-controls">
+<button id="leftBtn">◀</button>
+<button id="rightBtn">▶</button>
+</div>
+</section>
+
+<section id="lose" class="screen neon hidden">
+<h1>CHAOS!</h1>
+<button id="retryBtn">TRY AGAIN</button>
+</section>
+
+<section id="win" class="screen neon hidden">
+<h1>YOU WIN</h1>
+<p id="coupon"></p>
+<button id="rewardBtn">REDEEM</button>
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>
