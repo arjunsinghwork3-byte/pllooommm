@@ -4,6 +4,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const landing = document.getElementById("landing");
+const avatarBox = document.getElementById("avatarBox");
 const gameScreen = document.getElementById("game");
 const loseScreen = document.getElementById("lose");
 const winScreen = document.getElementById("win");
@@ -24,17 +25,39 @@ let frameIndex = 0;
 let frameTick = 0;
 
 const player = {
-    x: 180,
-    y: 540,
-    w: 32,
-    h: 32,
+    x: 160,
+    y: 520,
+    w: 48,   // character made slightly bigger
+    h: 48,
     speed: 6
 };
 
-const chaosWords = ["VENDORS","PLANNING","DECORATORS"];
+const chaosWords = [
+"Follow-ups",
+"Pricing",
+"Stakeholders",
+"Compliance",
+"Dropouts",
+"Changes",
+"Overruns",
+"Delays"
+];
 
-document.getElementById("startBtn").onclick = startGame;
-document.getElementById("retryBtn").onclick = startGame;
+document.getElementById("startBtn").onclick = () => {
+    landing.classList.add("hidden");
+    avatarBox.classList.remove("hidden");
+
+    setTimeout(()=>{
+        avatarBox.classList.add("hidden");
+        startGame();
+    }, 3000);
+};
+
+document.getElementById("continueBtn").onclick = () => {
+    loseScreen.classList.add("hidden");
+    winScreen.classList.remove("hidden");
+};
+
 document.getElementById("leftBtn").onclick = () => move(-1);
 document.getElementById("rightBtn").onclick = () => move(1);
 
@@ -51,33 +74,25 @@ function move(dir){
 }
 
 function startGame(){
-    landing.classList.add("hidden");
-    loseScreen.classList.add("hidden");
-    winScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
-
     score = 0;
     scoreEl.textContent = score;
     balls = [];
     running = true;
 
-    startMusic();
-
-    clearInterval(spawnTimer);
     spawnTimer = setInterval(spawnBall, 1500);
-
     loop();
 }
 
 function spawnBall(){
-    const isPloomm = Math.random() > 0.4;
+    const isOrange = Math.random() > 0.4;
 
     balls.push({
-        x: Math.random() * 360 + 20,
+        x: Math.random() * 350 + 20,
         y: -20,
-        radius: 18,
-        type: isPloomm ? "ploomm" : "chaos",
-        text: isPloomm ? "PLOOMM" : chaosWords[Math.floor(Math.random()*chaosWords.length)],
+        radius: 22,
+        type: isOrange ? "orange" : "chaos",
+        text: isOrange ? "PLOOMM" : chaosWords[Math.floor(Math.random()*chaosWords.length)],
         speed: 2
     });
 }
@@ -87,7 +102,6 @@ function loop(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // Sprite animation every 12 frames
     frameTick++;
     if(frameTick >= 12){
         frameIndex = (frameIndex + 1) % 2;
@@ -101,23 +115,22 @@ function loop(){
         let ball = balls[i];
         ball.y += ball.speed;
 
-        ctx.fillStyle = ball.type==="ploomm" ? "#f97316" : "#38bdf8";
+        ctx.fillStyle = ball.type==="orange" ? "#f97316" : "#000000";
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
         ctx.fill();
 
-        ctx.fillStyle = "#000";
-        ctx.font = "8px Arial";
-        ctx.fillText(ball.text, ball.x - 20, ball.y + 3);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px Arial";
+        ctx.fillText(ball.text, ball.x - 25, ball.y + 4);
 
-        // Proper collision detection
         if(
             ball.y + ball.radius > player.y &&
             ball.y - ball.radius < player.y + player.h &&
             ball.x + ball.radius > player.x &&
             ball.x - ball.radius < player.x + player.w
         ){
-            if(ball.type==="ploomm"){
+            if(ball.type==="orange"){
                 score += 10;
                 scoreEl.textContent = score;
                 if(score >= 100){
@@ -141,8 +154,6 @@ function endGame(win){
     running = false;
     cancelAnimationFrame(animationId);
     clearInterval(spawnTimer);
-    stopMusic();
-
     gameScreen.classList.add("hidden");
 
     if(win){
@@ -153,40 +164,6 @@ function endGame(win){
     } else {
         loseScreen.classList.remove("hidden");
     }
-}
-
-/* 80s melody loop */
-let audioCtx;
-let melodyTimer;
-
-const melody = [262, 330, 392, 330];
-
-function startMusic(){
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let i = 0;
-
-    melodyTimer = setInterval(()=>{
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "square";
-        osc.frequency.value = melody[i];
-        gain.gain.value = 0.05;
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.18);
-
-        i = (i + 1) % melody.length;
-
-    }, 220);
-}
-
-function stopMusic(){
-    if(melodyTimer) clearInterval(melodyTimer);
-    if(audioCtx) audioCtx.close();
 }
 
 });
