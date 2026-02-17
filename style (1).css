@@ -1,10 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-body{margin:0;font-family:'Press Start 2P';background:black;color:white;text-align:center}
-.screen{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:white;
+color:#0f172a;
+text-align:center;
+}
+
+.screen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.light{
+background:
+repeating-linear-gradient(
+    0deg,
+    #ffffff,
+    #ffffff 20px,
+    #e0f2fe 21px
+);
+}
+
 .hidden{display:none}
-.neon{background:radial-gradient(circle,#ff00cc,#020617)}
-.game-screen{min-height:100vh;background:url('background.webp') center/cover no-repeat}
-canvas{background:rgba(0,0,0,.7);border:3px solid #00ffff}
-.hud{color:#00ffff;padding:10px}
-button{padding:14px 24px;background:black;color:#00ffff;border:2px solid #00ffff}
-.mobile-controls{display:flex;justify-content:space-around}
+
+.avatar{
+padding:40px;
+background:#f0f9ff;
+border:2px solid #3b82f6;
+}
+
+.game-screen{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+background:white;
+}
+
+canvas{
+background:#ffffff;
+border:3px solid #2563eb;
+margin-top:10px;
+}
+
+.hud{
+color:#1d4ed8;
+padding:15px;
+font-weight:bold;
+}
+
+.pricing{
+margin-top:10px;
+color:#2563eb;
+font-weight:bold;
+}
+
+button{
+padding:12px 22px;
+background:#2563eb;
+color:white;
+border:none;
+margin-top:20px;
+cursor:pointer;
+}
+
+.mobile-controls{
+display:flex;
+justify-content:space-around;
+width:200px;
+margin-top:15px;
+}
