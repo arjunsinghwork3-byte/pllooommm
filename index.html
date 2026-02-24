@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ploomm Arcade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="landing" class="screen active">
+    <h1>Let’s Play</h1>
+    <button id="startBtn" class="primary-btn">Start</button>
+</section>
+
+<section id="avatarBox" class="screen hidden">
+    <div class="card">
+        <h2>Your Avatar</h2>
+        <h3>Jim – The Perfectionist</h3>
+        <p class="subtitle">Every detail must align</p>
+        <div class="metrics">
+            <p><strong>Event Need:</strong> Catering for product launch</p>
+            <p><strong>Budget:</strong> Medium</p>
+            <p><strong>Quality:</strong> High</p>
+            <p><strong>Professionalism:</strong> High</p>
+        </div>
+    </div>
+</section>
+
+<section id="game" class="screen hidden">
+    <div class="game-container">
+        <div class="hud">
+            <span>SCORE</span>
+            <span id="score">0</span>
+        </div>
+        <canvas id="canvas" width="400" height="600"></canvas>
+        <div class="mobile-controls">
+            <button id="leftBtn">◀</button>
+            <button id="rightBtn">▶</button>
+        </div>
+    </div>
+</section>
+
+<section id="lose" class="screen hidden">
+    <h1>Continue with Ploom</h1>
+    <button id="continueBtn" class="primary-btn">Continue</button>
+</section>
+
+<section id="win" class="screen hidden">
+    <h1>You Win!</h1>
+    <p class="highlight">“It’s that Easy with Ploomm”</p>
+    <p id="coupon" class="coupon"></p>
+    <p class="closing">
+        You’ve got your Event Planned with the Right Budget, Quality and Professional execution.
+    </p>
+    <p class="closing">
+        Enjoy your Reward for playing at Ploomm’s Arcade
+    </p>
+    <p class="character-line">
+        Jim ensured every detail aligned perfectly.
+    </p>
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>
