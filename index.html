@@ -8,32 +8,48 @@
 </head>
 <body>
 
+<!-- LANDING -->
 <section id="landing" class="screen active">
-    <h1>Let’s Play</h1>
+    <h1>Can you bring order to the chaos?</h1>
+    <p>A corporate event planning, simulation</p>
+
+    <p>Enter Arcade</p>
+
+    <p><strong>You Should</strong> - Avoid the black chaos balls.</p>
+    <p><strong>Your Goal</strong> - Catch as many Orange PLOOMM ball in few seconds as possible</p>
+    <p>And win!</p>
+
     <button id="startBtn" class="primary-btn">Start</button>
 </section>
 
+<!-- AVATAR -->
 <section id="avatarBox" class="screen hidden">
     <div class="card">
         <h2>Your Avatar</h2>
         <h3>Jim – The Perfectionist</h3>
         <p class="subtitle">Every detail must align</p>
+
         <div class="metrics">
             <p><strong>Event Need:</strong> Catering for product launch</p>
             <p><strong>Budget:</strong> Medium</p>
             <p><strong>Quality:</strong> High</p>
             <p><strong>Professionalism:</strong> High</p>
         </div>
+
+        <button id="playBtn" class="primary-btn">Let’s Play!</button>
     </div>
 </section>
 
+<!-- GAME -->
 <section id="game" class="screen hidden">
     <div class="game-container">
         <div class="hud">
             <span>SCORE</span>
             <span id="score">0</span>
         </div>
+
         <canvas id="canvas" width="400" height="600"></canvas>
+
         <div class="mobile-controls">
             <button id="leftBtn">◀</button>
             <button id="rightBtn">▶</button>
@@ -41,24 +57,32 @@
     </div>
 </section>
 
+<!-- LOSE -->
 <section id="lose" class="screen hidden">
-    <h1>Continue with Ploom</h1>
+    <h1>You caught Chaos!</h1>
+    <h2>Continue with PLOOMM</h2>
     <button id="continueBtn" class="primary-btn">Continue</button>
 </section>
 
+<!-- WIN -->
 <section id="win" class="screen hidden">
     <h1>You Win!</h1>
-    <p class="highlight">“It’s that Easy with Ploomm”</p>
-    <p id="coupon" class="coupon"></p>
-    <p class="closing">
-        You’ve got your Event Planned with the Right Budget, Quality and Professional execution.
+    <p>“It’s that Easy with PLOOMM!”</p>
+
+    <p>
+        Jim’s got his Event Planned with
+        <br>Right Budget
+        <br>High Quality
+        <br><br>
+        Professional Execution
     </p>
-    <p class="closing">
-        Enjoy your Reward for playing at Ploomm’s Arcade
+
+    <p>
+        Enjoy your Reward for Playing at
+        <br>Ploomm’s Arcade
     </p>
-    <p class="character-line">
-        Jim ensured every detail aligned perfectly.
-    </p>
+
+    <p id="coupon" class="coupon">(Reward Coupon Code)</p>
 </section>
 
 <script src="game.js"></script>
