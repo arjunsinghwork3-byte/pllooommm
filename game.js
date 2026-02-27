@@ -47,6 +47,8 @@ function showScreen(screen){
     screen.classList.add("active");
 }
 
+/* ---------- BUTTON LOGIC ---------- */
+
 document.getElementById("startBtn").onclick = () => {
     showScreen(avatarBox);
     setTimeout(()=>{
@@ -56,7 +58,9 @@ document.getElementById("startBtn").onclick = () => {
 };
 
 document.getElementById("continueBtn").onclick = () => {
-    showScreen(winScreen);
+    // Restart game instead of going to win screen
+    startGame();
+    showScreen(gameScreen);
 };
 
 document.getElementById("leftBtn").onclick = () => move(-1);
@@ -68,23 +72,34 @@ document.addEventListener("keydown", e => {
     if(e.key==="ArrowRight") move(1);
 });
 
+/* ---------- MOVEMENT ---------- */
+
 function move(dir){
     player.x += dir * player.speed;
     if(player.x < 0) player.x = 0;
     if(player.x > canvas.width - player.w) player.x = canvas.width - player.w;
 }
 
+/* ---------- GAME START ---------- */
+
 function startGame(){
     score = 0;
     scoreEl.textContent = score;
     balls = [];
     running = true;
+
+    clearInterval(spawnTimer);
+    cancelAnimationFrame(animationId);
+
     spawnTimer = setInterval(spawnBall,1500);
     loop();
 }
 
+/* ---------- BALL SPAWN ---------- */
+
 function spawnBall(){
     const isOrange = Math.random() > 0.4;
+
     balls.push({
         x: Math.random() * 350 + 20,
         y: -20,
@@ -95,6 +110,8 @@ function spawnBall(){
         speed: 2
     });
 }
+
+/* ---------- GAME LOOP ---------- */
 
 function loop(){
     if(!running) return;
@@ -132,12 +149,15 @@ function loop(){
             if(ball.type==="orange"){
                 score += 10;
                 scoreEl.textContent = score;
+
                 if(score >= 100){
                     endGame(true);
                 }
+
             } else {
                 endGame(false);
             }
+
             balls.splice(i,1);
         }
 
@@ -149,6 +169,8 @@ function loop(){
     animationId = requestAnimationFrame(loop);
 }
 
+/* ---------- GAME END ---------- */
+
 function endGame(win){
     running = false;
     cancelAnimationFrame(animationId);
@@ -158,6 +180,7 @@ function endGame(win){
         couponEl.textContent =
             "PLOOMM-" +
             Math.random().toString(36).substring(2,8).toUpperCase();
+
         showScreen(winScreen);
     } else {
         showScreen(loseScreen);
